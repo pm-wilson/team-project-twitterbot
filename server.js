@@ -14,41 +14,48 @@ const T = new Twit({
 const count = 10;
 const count2 = 10;
 
-
-async function getTrumpTweet() {
+async function getTweet(userName) {
   
-  const { data } = await T.get('statuses/user_timeline', { screen_name: 'realdonaldtrump', count2 })
+  const { data } = await T.get('statuses/user_timeline', { screen_name: userName, count2 });
   const random = Math.floor(Math.random() * count2);
 
-  console.log('trump:',data[random].text);
+  // console.log('trump:',data[random].text);
+  return data[random].text;
+}
+async function getTrumpTweet() {
+  
+  const { data } = await T.get('statuses/user_timeline', { screen_name: 'realdonaldtrump', count2 });
+  const random = Math.floor(Math.random() * count2);
+
+  console.log('trump:', data[random].text);
   return data[random].text;
 }
 
 
 async function getCookieTweet() {
-  const { data } = await T.get('statuses/user_timeline', { screen_name: 'mecookiemonster', count2 })
+  const { data } = await T.get('statuses/user_timeline', { screen_name: 'mecookiemonster', count2 });
   const random = Math.floor(Math.random() * count2);
 
-  console.log('cookie:',data[random].text);
+  console.log('cookie:', data[random].text);
   return data[random].text;
 }
 
-async function tweet() {
-  const cookie =await  getCookieTweet()
-  const trump = await getTrumpTweet()
-  return `cookie ${cookie}  trump${trump}`;
+async function tweet(user1, user2) {
+  const tweet1 = await  getTweet(user1);
+  const tweet2 = await getTweet(user2);
+  return `${tweet1}  ${tweet2}`;
 }
 
 // const whatever = tweet();
 // console.log(whatever);
-async function mashupTweet() {
-  tweet().then((whatever) => T.post('statuses/update', { status: whatever}, (err, data, response) => { console.log('mashupTweet', data.text) }))
-  }
+async function mashupTweet(user1, user2) {
+  tweet(user1, user2).then((whatever) => T.post('statuses/update', { status: whatever }, (err, data, response) => { console.log('mashupTweet', data.text); }));
+}
   
 // getTrumpTweet()
 
 
-mashupTweet();
+mashupTweet('mecookiemonster', 'realdonaldtrump');
 
 // Promise.all([
 //   getCookieTweet,
