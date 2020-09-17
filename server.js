@@ -10,17 +10,14 @@ const T = new Twit({
 const count = 100;
 
 async function getTweet(userName) {
-  
   const { data } = await T.get('statuses/user_timeline', { screen_name: userName, count });
   const random = Math.floor(Math.random() * count);
 
-  if(userName === 'realdonaldtrump') {
-    return data[0].text;
-  } return data[random].text;
-
+  return data[random].text;
 }
 
 async function tweet(user1, user2) {
+
   const tweet1 = await getTweet(user1);
   const tweet2 = await getTweet(user2);
 
@@ -57,4 +54,4 @@ async function mashupTweet(user1, user2) {
   tweet(user1, user2).then((post) => T.post('statuses/update', { status: post }, (err, data) => { console.log('mashupTweet', data.text); }));
 }
 
-mashupTweet('mecookiemonster', 'realdonaldtrump');
+setInterval(() => { mashupTweet('mecookiemonster', 'realdonaldtrump'); }, 1000 * 60 * 25);
