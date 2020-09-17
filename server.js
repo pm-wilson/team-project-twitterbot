@@ -14,14 +14,45 @@ const T = new Twit({
 const count = 10;
 const count2 = 10;
 
-T.get('statuses/user_timeline', { screen_name: 'mecookiemonster', count }, (err, data, response) => {
-  const random = Math.floor(Math.random() * count);
 
-  console.log(data[random].text);
-});
-
-T.get('statuses/user_timeline', { screen_name: 'realdonaldtrump', count2 }, (err, data, response) => {
+async function getTrumpTweet() {
+  
+  const { data } = await T.get('statuses/user_timeline', { screen_name: 'realdonaldtrump', count2 })
   const random = Math.floor(Math.random() * count2);
 
-  console.log(data[random].text);
-});
+  console.log('trump:',data[random].text);
+  return data[random].text;
+}
+
+
+async function getCookieTweet() {
+  const { data } = await T.get('statuses/user_timeline', { screen_name: 'mecookiemonster', count2 })
+  const random = Math.floor(Math.random() * count2);
+
+  console.log('cookie:',data[random].text);
+  return data[random].text;
+}
+
+async function tweet() {
+  const cookie =await  getCookieTweet()
+  const trump = await getTrumpTweet()
+  return `cookie ${cookie}  trump${trump}`;
+}
+
+// const whatever = tweet();
+// console.log(whatever);
+async function mashupTweet() {
+  tweet().then((whatever) => T.post('statuses/update', { status: whatever}, (err, data, response) => { console.log('mashupTweet', data.text) }))
+  }
+  
+// getTrumpTweet()
+
+
+mashupTweet();
+
+// Promise.all([
+//   getCookieTweet,
+//   getTrumpTweet
+// ]).then(maashupTweet)
+
+// const maashupTweet = T.post('statuses/update', { status: values[0] + ' stuff' + values[1] }, (err, data, response) => { console.log(data.text) })
