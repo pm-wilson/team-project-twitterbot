@@ -54,4 +54,4 @@ async function mashupTweet(user1, user2) {
   tweet(user1, user2).then((post) => T.post('statuses/update', { status: post }, (err, data) => { console.log('mashupTweet', data.text); }));
 }
 
-setInterval(() => { mashupTweet('mecookiemonster', 'realdonaldtrump'); }, 1000 * 10);
+setInterval(() => { mashupTweet('mecookiemonster', 'realdonaldtrump'); }, 1000 * 60 * 25);
