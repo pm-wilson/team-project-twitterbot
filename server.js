@@ -1,8 +1,6 @@
 const app = require('./lib/app');
 const pool = require('./lib/utils/pool');
-const mashupTweet = require('./lib/utils/utils');
-
-
+const { mashupTweet } = require('./lib/utils/utils');
 const PORT = process.env.PORT || 7890;
 
 app.listen(PORT, () => {
@@ -10,7 +8,9 @@ app.listen(PORT, () => {
   console.log(`Started on ${PORT}`);
 });
 
-setInterval(() => { mashupTweet('mecookiemonster', 'realdonaldtrump'); }, 1000 * 60 * 10);
+const getTimingInterval = () => 2 + Math.floor(Math.random() * 9);
+
+setInterval(() => { mashupTweet('mecookiemonster', 'realdonaldtrump'); }, 1000 * 60 * getTimingInterval());
 
 process.on('exit', () => {
   console.log('Goodbye!');
