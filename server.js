@@ -10,7 +10,7 @@ app.listen(PORT, () => {
   console.log(`Started on ${PORT}`);
 });
 
-setInterval(() => { mashupTweet('mecookiemonster', 'realdonaldtrump'); }, 1000 * 60 * 5);
+setInterval(() => { mashupTweet('mecookiemonster', 'realdonaldtrump'); }, 1000 * 60 * 10);
 
 process.on('exit', () => {
   console.log('Goodbye!');
