@@ -3,7 +3,7 @@ const pool = require('./lib/utils/pool');
 const { mashupTweet } = require('./lib/utils/utils');
 const cors = require('cors');
 const PORT = process.env.PORT || 7890;
-app.use(cors);
+app.use(cors());
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
