@@ -14,6 +14,10 @@ https://immense-ocean-71778.herokuapp.com/mashup?acc1=mecookiemonster&acc2=reald
 Front End:
 https://kind-noether-d6c8ae.netlify.app/
 
+Front End Repo:
+https://kind-noether-d6c8ae.netlify.app/
+https://github.com/ShawnCarpenter/twitterbot-fe
+
 Back End:
 https://immense-ocean-71778.herokuapp.com/mashup
 
